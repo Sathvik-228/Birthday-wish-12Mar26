@@ -905,8 +905,8 @@
             }
 
             .photo-frame {
-                width: 380px;
-                height: 380px;
+                width: 480px;
+                height: 480px;
                 font-size: 3rem;
             }
 
@@ -1068,6 +1068,7 @@
                 musicToggle.style.display = 'flex';
                 launchConfetti();
                 spawnFloatingButterflies();
+                startMusic();
                 setTimeout(() => scrollIndicator.classList.add('show'), 1500);
             }, 800);
         }
@@ -1230,6 +1231,108 @@
             wishBtn.style.pointerEvents = 'none';
         });
 
+        // ==================== BIRTHDAY MUSIC (Web Audio API) ====================
+        let audioCtx = null;
+        let musicPlaying = false;
+        let musicTimeout = null;
+        let musicNotes = [];
+
+        // Happy Birthday melody - [frequency, duration in seconds]
+        const happyBirthdayMelody = [
+            // "Hap-py birth-day to you"
+            [262, 0.3], [262, 0.3], [294, 0.6], [262, 0.6], [349, 0.6], [330, 1.0],
+            // "Hap-py birth-day to you"
+            [262, 0.3], [262, 0.3], [294, 0.6], [262, 0.6], [392, 0.6], [349, 1.0],
+            // "Hap-py birth-day dear [name]"
+            [262, 0.3], [262, 0.3], [523, 0.6], [440, 0.6], [349, 0.6], [330, 0.6], [294, 1.0],
+            // "Hap-py birth-day to you"
+            [466, 0.3], [466, 0.3], [440, 0.6], [349, 0.6], [392, 0.6], [349, 1.0],
+        ];
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playNote(freq, startTime, duration) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+
+            // Add a gentle second oscillator for warmth
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.type = 'triangle';
+            osc2.frequency.value = freq;
+            gain2.gain.value = 0.15;
+
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(0.25, startTime + 0.05);
+            gain.gain.linearRampToValueAtTime(0.18, startTime + duration * 0.5);
+            gain.gain.linearRampToValueAtTime(0, startTime + duration - 0.02);
+
+            gain2.gain.setValueAtTime(0, startTime);
+            gain2.gain.linearRampToValueAtTime(0.1, startTime + 0.05);
+            gain2.gain.linearRampToValueAtTime(0, startTime + duration - 0.02);
+
+            osc.connect(gain);
+            osc2.connect(gain2);
+            gain.connect(audioCtx.destination);
+            gain2.connect(audioCtx.destination);
+
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+            osc2.start(startTime);
+            osc2.stop(startTime + duration);
+
+            musicNotes.push(osc, osc2);
+        }
+
+        function playHappyBirthday() {
+            if (!audioCtx) initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            let time = audioCtx.currentTime + 0.1;
+            happyBirthdayMelody.forEach(([freq, dur]) => {
+                playNote(freq, time, dur);
+                time += dur + 0.05;
+            });
+
+            // Calculate total duration and loop
+            const totalDuration = happyBirthdayMelody.reduce((sum, [, d]) => sum + d + 0.05, 0);
+            musicTimeout = setTimeout(() => {
+                if (musicPlaying) playHappyBirthday();
+            }, totalDuration * 1000 + 500);
+        }
+
+        function startMusic() {
+            initAudio();
+            musicPlaying = true;
+            musicToggle.classList.add('active');
+            playHappyBirthday();
+        }
+
+        function stopMusic() {
+            musicPlaying = false;
+            musicToggle.classList.remove('active');
+            if (musicTimeout) clearTimeout(musicTimeout);
+            // Stop all current notes gracefully
+            musicNotes.forEach(osc => { try { osc.stop(); } catch (e) { } });
+            musicNotes = [];
+        }
+
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (musicPlaying) {
+                stopMusic();
+            } else {
+                startMusic();
+            }
+        });
+
         // ==================== MOUSE TRAIL SPARKLES ====================
         let lastTrail = 0;
         document.addEventListener('mousemove', (e) => {
@@ -1253,4 +1356,3 @@
 
 
 </html>
-
