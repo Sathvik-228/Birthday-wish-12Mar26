@@ -314,8 +314,10 @@
             font-size: 2.5rem;
             color: #f8c8ff;
             margin-bottom: 2rem;
-            text-shadow: 0 0 20px rgba(248, 200, 255, 0.5);
+            text-shadow: 0 0 30px rgba(248, 200, 255, 0.5),
+                0 0 60px rgba(248, 200, 255, 0.2);
             animation: gentlePulse 2s ease-in-out infinite;
+            letter-spacing: 2px;
         }
 
         @keyframes gentlePulse {
@@ -423,10 +425,23 @@
 
         .envelope-label {
             font-family: 'Dancing Script', cursive;
-            font-size: 1rem;
-            color: #7c3aed;
+            font-size: 1.1rem;
+            color: #9f7aea;
             margin-top: 1.5rem;
-            animation: fadeInUp 1s ease 0.5s both;
+            animation: fadeInUp 1s ease 0.5s both, labelPulse 2.5s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(159, 122, 234, 0.3);
+        }
+
+        @keyframes labelPulse {
+
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
@@ -466,16 +481,18 @@
 
         .hero-badge {
             display: inline-block;
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.3));
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(236, 72, 153, 0.25));
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(168, 85, 247, 0.4);
             border-radius: 50px;
-            padding: 0.5rem 1.5rem;
+            padding: 0.6rem 1.8rem;
             font-size: 0.85rem;
             color: #e8b4f8;
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 1.5rem;
             animation: slideDown 1s ease 0.3s both;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
         }
 
         @keyframes slideDown {
@@ -571,6 +588,17 @@
         .cake {
             font-size: 5rem;
             filter: drop-shadow(0 10px 30px rgba(251, 191, 36, 0.3));
+            animation: cakeGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes cakeGlow {
+            0% {
+                filter: drop-shadow(0 10px 30px rgba(251, 191, 36, 0.3));
+            }
+
+            100% {
+                filter: drop-shadow(0 15px 50px rgba(251, 191, 36, 0.5)) drop-shadow(0 0 20px rgba(255, 200, 50, 0.2));
+            }
         }
 
         /* Candle Glow */
@@ -666,9 +694,10 @@
         .message-card-inner {
             position: relative;
             z-index: 1;
-            background: linear-gradient(145deg, rgba(26, 5, 51, 0.9), rgba(45, 27, 105, 0.9));
+            background: linear-gradient(145deg, rgba(13, 2, 33, 0.95), rgba(26, 5, 51, 0.95));
             border-radius: 20px;
             padding: 2.5rem 2rem;
+            border: 1px solid rgba(168, 85, 247, 0.1);
         }
 
         .message-card h2 {
@@ -676,12 +705,13 @@
             font-size: 2rem;
             color: #f0abfc;
             margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(240, 171, 252, 0.3);
         }
 
         .message-card p {
             font-family: 'Poppins', sans-serif;
             font-size: 1.05rem;
-            line-height: 1.9;
+            line-height: 1.95;
             color: #d8b4fe;
         }
 
@@ -690,6 +720,7 @@
             font-size: 1.8rem;
             color: #fbbf24;
             margin-top: 2rem;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
         }
 
         /* Wish Reveal */
@@ -705,17 +736,20 @@
             border: 2px solid rgba(168, 85, 247, 0.5);
             border-radius: 50px;
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));
+            backdrop-filter: blur(10px);
             color: #f0abfc;
             cursor: pointer;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 5px 25px rgba(168, 85, 247, 0.15);
         }
 
         .magic-btn:hover {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.4));
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
-            transform: scale(1.05);
+            box-shadow: 0 5px 50px rgba(168, 85, 247, 0.5), 0 0 80px rgba(236, 72, 153, 0.15);
+            transform: scale(1.08);
+            border-color: rgba(236, 72, 153, 0.6);
         }
 
         .magic-btn::after {
@@ -805,6 +839,7 @@
             font-size: 2.5rem;
             color: #f0abfc;
             margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(240, 171, 252, 0.3);
         }
 
         .photo-frames {
@@ -1077,7 +1112,8 @@
             height: 50px;
             border-radius: 50%;
             border: 2px solid rgba(168, 85, 247, 0.4);
-            background: rgba(26, 5, 51, 0.8);
+            background: rgba(13, 2, 33, 0.85);
+            backdrop-filter: blur(10px);
             color: #f0abfc;
             font-size: 1.4rem;
             cursor: pointer;
@@ -1085,11 +1121,13 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
         }
 
         .music-toggle:hover {
             background: rgba(168, 85, 247, 0.3);
             transform: scale(1.1);
+            box-shadow: 0 4px 30px rgba(168, 85, 247, 0.4);
         }
 
         .music-toggle.active .bar {
@@ -1279,6 +1317,14 @@
 
 <body>
 
+    <!-- Aurora Background -->
+    <div class="aurora">
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+    </div>
+
     <!-- Stars Background -->
     <div class="stars" id="stars"></div>
 
@@ -1287,6 +1333,9 @@
 
     <!-- Landing Screen with Envelope -->
     <div class="landing-screen" id="landingScreen">
+        <div class="landing-orb"></div>
+        <div class="landing-orb"></div>
+        <div class="landing-orb"></div>
         <p class="landing-text">You have a special surprise...</p>
         <div class="envelope-container" id="envelopeBtn" role="button" tabindex="0" aria-label="Open birthday card">
             <div class="envelope">
@@ -1325,6 +1374,10 @@
             </div>
         </section>
 
+        <!-- Divider -->
+        <div class="section-divider"><span class="line"></span><span class="ornament">🦋</span><span
+                class="line"></span></div>
+
         <!-- Birthday Message -->
         <section class="message-section">
             <div class="message-card" id="messageCard">
@@ -1351,6 +1404,10 @@
             </div>
         </section>
 
+        <!-- Divider -->
+        <div class="section-divider"><span class="line"></span><span class="ornament">✨</span><span class="line"></span>
+        </div>
+
         <!-- Photo Memory Gallery -->
         <section class="gallery-section">
             <h2>🦋 A Special Memory 🦋</h2>
@@ -1361,6 +1418,10 @@
                 </div>
             </div>
         </section>
+
+        <!-- Divider -->
+        <div class="section-divider"><span class="line"></span><span class="ornament">🌸</span><span
+                class="line"></span></div>
 
         <!-- Interactive Wishes Section -->
         <section class="wish-section">
@@ -1379,6 +1440,7 @@
         <!-- Footer -->
         <div class="footer">
             Made with <span>❤️</span> just for you
+            <div class="footer-stars">✦ ✧ ✦ ✧ ✦</div>
         </div>
     </div>
 
@@ -1711,6 +1773,43 @@
             document.body.appendChild(trail);
             setTimeout(() => trail.remove(), 1000);
         });
+
+        // ==================== SHOOTING STARS ====================
+        function spawnShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.top = (Math.random() * 40) + '%';
+            star.style.left = (60 + Math.random() * 40) + '%';
+            const dur = 1 + Math.random() * 1.5;
+            star.style.animation = `shoot ${dur}s linear forwards`;
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), dur * 1000 + 100);
+        }
+        setInterval(spawnShootingStar, 4000 + Math.random() * 3000);
+        setTimeout(spawnShootingStar, 2000);
+
+        // ==================== GOLDEN PARTICLES ====================
+        function spawnGoldenParticle() {
+            const p = document.createElement('div');
+            p.className = 'golden-particle';
+            p.style.left = Math.random() * 100 + '%';
+            const size = 2 + Math.random() * 4;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            const colors = ['rgba(251,191,36,0.6)', 'rgba(245,158,11,0.5)', 'rgba(252,211,77,0.4)', 'rgba(168,85,247,0.3)'];
+            p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            p.style.boxShadow = '0 0 6px ' + p.style.backgroundColor;
+            const dur = 10 + Math.random() * 15;
+            p.style.animationDuration = dur + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), (dur + 5) * 1000);
+        }
+        // Spawn a batch of golden particles
+        for (let i = 0; i < 15; i++) {
+            setTimeout(spawnGoldenParticle, i * 800);
+        }
+        setInterval(spawnGoldenParticle, 2500);
     </script>
 </body>
 
