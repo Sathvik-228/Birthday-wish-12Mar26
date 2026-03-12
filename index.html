@@ -14,12 +14,193 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             min-height: 100vh;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #1a0533, #2d1b69, #1a0533);
+            background: linear-gradient(135deg, #0d0221, #1a0533, #2d1b69, #150430, #0d0221);
+            background-size: 400% 400%;
+            animation: bgShift 20s ease infinite;
             font-family: 'Poppins', sans-serif;
             cursor: default;
+        }
+
+        @keyframes bgShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 100% 0%;
+            }
+
+            50% {
+                background-position: 100% 100%;
+            }
+
+            75% {
+                background-position: 0% 100%;
+            }
+        }
+
+        /* ======================== AURORA / NEBULA ======================== */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            animation: auroraFloat 15s ease-in-out infinite;
+        }
+
+        .aurora-blob:nth-child(1) {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #a855f7, transparent);
+            top: -10%;
+            left: -10%;
+            animation-duration: 18s;
+        }
+
+        .aurora-blob:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #ec4899, transparent);
+            top: 40%;
+            right: -15%;
+            animation-duration: 22s;
+            animation-delay: -5s;
+        }
+
+        .aurora-blob:nth-child(3) {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, #6366f1, transparent);
+            bottom: -10%;
+            left: 30%;
+            animation-duration: 20s;
+            animation-delay: -10s;
+        }
+
+        .aurora-blob:nth-child(4) {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #f59e0b, transparent);
+            top: 20%;
+            left: 50%;
+            animation-duration: 25s;
+            animation-delay: -3s;
+            opacity: 0.06;
+        }
+
+        @keyframes auroraFloat {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            25% {
+                transform: translate(50px, -30px) scale(1.1);
+            }
+
+            50% {
+                transform: translate(-30px, 50px) scale(0.95);
+            }
+
+            75% {
+                transform: translate(40px, 20px) scale(1.05);
+            }
+        }
+
+        /* ======================== SHOOTING STARS ======================== */
+        .shooting-star {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 1.5px;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
+            transform-origin: right center;
+        }
+
+        @keyframes shoot {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) rotate(-45deg);
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-400px, 400px) rotate(-45deg);
+            }
+        }
+
+        /* ======================== GOLDEN PARTICLES ======================== */
+        .golden-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: goldenFloat linear infinite;
+        }
+
+        @keyframes goldenFloat {
+            0% {
+                transform: translateY(105vh) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(1);
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-5vh) scale(0.3);
+                opacity: 0;
+            }
         }
 
         /* ======================== STARS BACKGROUND ======================== */
@@ -66,8 +247,60 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            background: linear-gradient(135deg, #1a0533, #2d1b69, #0f0225);
+            background: linear-gradient(135deg, #0d0221, #1a0533, #2d1b69, #0f0225);
+            background-size: 300% 300%;
+            animation: bgShift 15s ease infinite;
             transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .landing-orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: orbPulse 6s ease-in-out infinite;
+        }
+
+        .landing-orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: #a855f7;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .landing-orb:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: #ec4899;
+            bottom: 15%;
+            right: 10%;
+            animation-delay: -2s;
+        }
+
+        .landing-orb:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: #6366f1;
+            top: 50%;
+            left: 60%;
+            animation-delay: -4s;
+        }
+
+        @keyframes orbPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.12;
+            }
+
+            50% {
+                transform: scale(1.3);
+                opacity: 0.2;
+            }
         }
 
         .landing-screen.hidden {
@@ -119,7 +352,9 @@
             height: 100%;
             background: linear-gradient(145deg, #f7e6ff, #e8c8f5);
             border-radius: 8px;
-            box-shadow: 0 15px 50px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 15px 50px rgba(168, 85, 247, 0.4),
+                0 0 80px rgba(168, 85, 247, 0.15),
+                inset 0 0 30px rgba(168, 85, 247, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -258,14 +493,15 @@
         .hero h1 {
             font-family: 'Great Vibes', cursive;
             font-size: clamp(3rem, 8vw, 7rem);
-            background: linear-gradient(135deg, #f8c8ff, #ff9de2, #c084fc, #f8c8ff);
-            background-size: 300% 300%;
+            background: linear-gradient(135deg, #f8c8ff, #ff9de2, #c084fc, #fbbf24, #f8c8ff);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: gradientShift 4s ease infinite, scaleIn 1s ease 0.5s both;
             line-height: 1.2;
             margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 30px rgba(248, 200, 255, 0.3));
         }
 
         @keyframes gradientShift {
@@ -296,8 +532,22 @@
             font-family: 'Great Vibes', cursive;
             font-size: clamp(2.5rem, 6vw, 5rem);
             color: #fbbf24;
-            text-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
-            animation: fadeInUp 1s ease 0.8s both;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.5),
+                0 0 60px rgba(251, 191, 36, 0.2),
+                0 0 100px rgba(251, 191, 36, 0.1);
+            animation: fadeInUp 1s ease 0.8s both, nameGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes nameGlow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 30px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.2);
+            }
+
+            50% {
+                text-shadow: 0 0 40px rgba(251, 191, 36, 0.7), 0 0 80px rgba(251, 191, 36, 0.3), 0 0 120px rgba(251, 191, 36, 0.15);
+            }
         }
 
         /* Cake */
@@ -347,6 +597,27 @@
             }
         }
 
+        /* ======================== SECTION DIVIDER ======================== */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem 0;
+        }
+
+        .section-divider .line {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(168, 85, 247, 0.5), transparent);
+        }
+
+        .section-divider .ornament {
+            font-size: 1.5rem;
+            animation: gentlePulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
+        }
+
         /* Message Section */
         .message-section {
             padding: 4rem 2rem;
@@ -357,8 +628,8 @@
             max-width: 700px;
             margin: 0 auto;
             background: linear-gradient(145deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.1));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(168, 85, 247, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 24px;
             padding: 3rem 2.5rem;
             position: relative;
@@ -366,6 +637,8 @@
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.8s ease, transform 0.8s ease;
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.15),
+                0 0 100px rgba(168, 85, 247, 0.05);
         }
 
         .message-card.visible {
@@ -480,8 +753,9 @@
         }
 
         .wish-item {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.08));
-            border: 1px solid rgba(168, 85, 247, 0.2);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.08));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 85, 247, 0.25);
             border-radius: 16px;
             padding: 1.2rem 1.5rem;
             margin: 1rem 0;
@@ -490,6 +764,29 @@
             opacity: 0;
             transform: translateX(-30px);
             transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wish-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .wish-item:hover::before {
+            left: 100%;
+        }
+
+        .wish-item:hover {
+            border-color: rgba(236, 72, 153, 0.4);
+            box-shadow: 0 5px 25px rgba(168, 85, 247, 0.15);
+            transform: translateX(5px);
         }
 
         .wish-item.show {
@@ -521,7 +818,7 @@
             width: 480px;
             height: 480px;
             background: linear-gradient(145deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.15));
-            border: 3px solid rgba(168, 85, 247, 0.4);
+            border: 3px solid transparent;
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -530,7 +827,35 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.25);
+            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.25),
+                0 0 80px rgba(168, 85, 247, 0.1);
+            background-clip: padding-box;
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 22px;
+            background: linear-gradient(45deg, #a855f7, #ec4899, #6366f1, #f59e0b, #a855f7);
+            background-size: 400% 400%;
+            animation: borderGlow 4s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes borderGlow {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .photo-frame img {
@@ -550,9 +875,9 @@
         }
 
         .photo-frame:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.4);
-            border-color: rgba(236, 72, 153, 0.6);
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 20px 80px rgba(168, 85, 247, 0.5),
+                0 0 120px rgba(236, 72, 153, 0.2);
         }
 
         .photo-frame .frame-label {
@@ -560,13 +885,15 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 12px;
+            padding: 16px;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: #fff;
-            background: linear-gradient(transparent, rgba(26, 5, 51, 0.8));
+            background: linear-gradient(transparent, rgba(13, 2, 33, 0.9));
             border-radius: 0 0 17px 17px;
             text-align: center;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+            letter-spacing: 1px;
         }
 
         /* ======================== BUTTERFLIES ======================== */
@@ -883,14 +1210,47 @@
         /* ======================== FOOTER ======================== */
         .footer {
             text-align: center;
-            padding: 3rem 2rem;
-            color: #7c3aed;
+            padding: 4rem 2rem 3rem;
+            color: #9f7aea;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(168, 85, 247, 0.4), transparent);
         }
 
         .footer span {
             color: #ec4899;
+            display: inline-block;
+            animation: heartPulseFooter 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartPulseFooter {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+        }
+
+        .footer-stars {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 8px;
+            opacity: 0.5;
         }
 
         /* ======================== RESPONSIVE ======================== */
